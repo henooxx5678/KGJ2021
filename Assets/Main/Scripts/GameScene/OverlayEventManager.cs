@@ -19,6 +19,8 @@ public class OverlayEventManager : MonoBehaviour {
     public GameObject[] events;
 
 
+    public bool IsEventPlaying {get; private set;} = false;
+
     Sequence _currentSeq;
 
 
@@ -37,10 +39,12 @@ public class OverlayEventManager : MonoBehaviour {
                 if (_currentSeq != null)
                     _currentSeq.Kill();
 
+                IsEventPlaying = true;
                 _currentSeq = DOTween.Sequence()
                     .AppendCallback( () => e.SetActive(true) )
                     .AppendInterval(eventDuration)
-                    .AppendCallback( () => e.SetActive(false) );
+                    .AppendCallback( () => e.SetActive(false) )
+                    .OnComplete( () => IsEventPlaying = false );
             }
             else {
                 events[i].SetActive(false);

@@ -19,7 +19,7 @@ public class Player : SingletonMonoBehaviour<Player> {
     [Header("REFS")]
     public PlayerCarried carried;
 
-    public bool IsControllable => GameSceneManager.current.IsDayRunning;
+    public bool IsControllable => (GameSceneManager.current.IsDayRunning && !GameSceneManager.current.overlayEventManager.IsEventPlaying);
 
     Rigidbody2D _rb;
 
@@ -42,7 +42,8 @@ public class Player : SingletonMonoBehaviour<Player> {
         DoorTriggerHandler door = other.gameObject.GetComponent<DoorTriggerHandler>();
 
         if (door != null) {
-
+            if (door.visitable != null)
+                door.visitable.Visited(carried.CurrentCarried);
         }
     }
 

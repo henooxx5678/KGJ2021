@@ -31,13 +31,18 @@ public class DialogBox : MonoBehaviour {
         DialogText = Dialog.RandomAllFine;
     }
 
-    public void ShowDialog (string dialog) {
+    public void ShowDialog (string dialog, bool returnToAllFine = true, string alteredText = "") {
         if (_currentSeq != null)
             _currentSeq.Kill(false);
 
         _currentSeq = DOTween.Sequence()
             .AppendCallback( () => DialogText = dialog )
             .AppendInterval(dialogDuration)
-            .AppendCallback(SetToAllFine);
+            .AppendCallback( () => {
+                if (returnToAllFine)
+                    SetToAllFine();
+                else
+                    DialogText = alteredText;
+            } );
     }
 }

@@ -11,7 +11,7 @@ using DG.Tweening;
 using DoubleHeat;
 using DoubleHeat.Utilities;
 
-public class Citizen : MonoBehaviour {
+public class Citizen : Visitable {
 
     public static List<Citizen> list = new List<Citizen>();
 
@@ -26,8 +26,12 @@ public class Citizen : MonoBehaviour {
     public DialogBox dialogBox;
     public AudioSource visitedSound;
 
+    public bool HasEatenToday => (_gotToday != Item.None);
+
     Decision _decision;
     Item     _gotYesterday = Item.None;
+    Item     _gotToday = Item.None;
+    int      _continuousNoEatDays = 0;
 
     void Awake () {
         list.Add(this);
@@ -41,11 +45,9 @@ public class Citizen : MonoBehaviour {
         _decision = new Decision(noSameAsYesterdayPossibility, noSourPossibility, noPekoTeaPossibility, noSushiPossibility);
     }
 
-    public void ReturnNormal () {
-        dialogBox.SetToAllFine();
-    }
-
-    public void Visited (Item item) {
+    public override void Visited (Item item) {
+        if (HasEatenToday)
+            return;
 
         // play sound
         if (visitedSound != null) {
@@ -53,8 +55,20 @@ public class Citizen : MonoBehaviour {
             visitedSound.Play();
         }
 
+        Decide(item);
+    }
 
+    public void OnNewDay () {
+        InitDecision();
+        dialogBox.SetToAllFine();
 
+        if (!HasEatenToday)
+            _continuousNoEatDays++;
+        else
+            _continuousNoEatDays = 0;
+
+        _gotYesterday = _gotToday;
+        _gotToday = Item.None;
     }
 
     void Decide (Item item) {
@@ -104,6 +118,7 @@ public class Citizen : MonoBehaviour {
             }
         }
 
+        _gotToday = item;
         OnAccept(item);
     }
 
@@ -112,14 +127,18 @@ public class Citizen : MonoBehaviour {
         switch (item) {
             case Item.Pineapple:
                 GameSceneManager.current.OnPineappleSent();
+                dialogBox.ShowDialog("", false);
                 break;
             case Item.Mango:
                 GameSceneManager.current.OnMangoSent();
+                dialogBox.ShowDialog("", false);
                 break;
             case Item.PekoTea:
-                dialogBox.ShowDialog(Dialog.pekoTea);
+                dialogBox.ShowDialog(Dialog.pekoTea, false);
                 break;
             case Item.Sushi:
+                dialogBox.ShowDialog("", false);
+                // sushi party
                 break;
         }
     }

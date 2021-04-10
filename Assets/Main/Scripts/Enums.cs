@@ -3,7 +3,5 @@ public enum Item {
     Mango,
     PekoTea,
     Sushi,
-    Ship,
-    Excavator,
     None
 }

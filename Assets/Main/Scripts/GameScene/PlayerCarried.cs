@@ -17,13 +17,18 @@ public class PlayerCarried : MonoBehaviour {
 
     public Item CurrentCarried {get; private set;} = (Item) 0;
 
+    void Start () {
+        SwitchTo((int) CurrentCarried);
+    }
 
     void Update () {
         // SWITCH
-        for (int i = 0 ; i < carriedGOs.Length ; i++) {
-            if (Input.inputString.Contains( (i + 1).ToString() )) {
-                SwitchTo(i);
-                break;
+        if (Player.current.IsControllable) {
+            for (int i = 0 ; i < carriedGOs.Length ; i++) {
+                if (Input.inputString.Contains( (i + 1).ToString() )) {
+                    SwitchTo(i);
+                    break;
+                }
             }
         }
     }

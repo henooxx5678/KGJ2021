@@ -16,6 +16,12 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
     public OverlayEventManager overlayEventManager;
     public Transform playerStartPoint;
 
+    [Header("Visitable")]
+    public ShipRenter shipRenter;
+    public Dock       dock;
+
+
+    public bool HasShip {get; set;} = false;
 
     public bool IsDayStarted {get; private set;} = false;
     public bool IsDayEnded {get; private set;} = false;
@@ -45,7 +51,7 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
     }
 
     void Start () {
-        NewDay();
+        NewDayAndStart();
     }
 
 
@@ -53,10 +59,7 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
         IsDayEnded = true;
 
         Global.current.transitionManager.FadeScreenOut( () => {
-            NewDay();
-            Global.current.transitionManager.FadeScreenIn( () => {
-                IsDayStarted = true;
-            } );
+            NewDayAndStart();
         } );
     }
 
@@ -78,17 +81,20 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
 
     void UpdateCitizensAtDayStart () {
         foreach (Citizen citizen in Citizen.list) {
-            citizen.InitDecision();
-            citizen.dialogBox.SetToAllFine();
+            citizen.OnNewDay();
         }
     }
 
-    void NewDay () {
+    void NewDayAndStart () {
         DayCount += 1;
         IsDayStarted = false;
         IsDayEnded = false;
         UpdateCitizensAtDayStart();
         Player.current.transform.SetPosXY(playerStartPoint.position);
+
+        Global.current.transitionManager.FadeScreenIn( () => {
+            IsDayStarted = true;
+        } );
     }
 
 }

@@ -15,6 +15,6 @@ using DoubleHeat.Utilities;
 public class DoorTriggerHandler : MonoBehaviour {
 
     [Header("REFS")]
-    public Citizen citizen;
+    public Visitable visitable;
 
 }

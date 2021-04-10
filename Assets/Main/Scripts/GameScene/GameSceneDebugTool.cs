@@ -17,6 +17,9 @@ public class GameSceneDebugTool : MonoBehaviour {
     public float hor;
     public float vert;
     public float time;
+    public bool  isDayRunning;
+    public bool  isOverlayEventPlaying;
+    public bool  isPlayerControllable;
 
     void Update () {
 
@@ -37,6 +40,10 @@ public class GameSceneDebugTool : MonoBehaviour {
 
         hor = Input.GetAxisRaw("Horizontal");
         vert = Input.GetAxisRaw("Vertical");
+
+        isDayRunning = GameSceneManager.current.IsDayRunning;
+        isOverlayEventPlaying = GameSceneManager.current.overlayEventManager.IsEventPlaying;
+        isPlayerControllable = Player.current.IsControllable;
 
     }
 
