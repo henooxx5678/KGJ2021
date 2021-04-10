@@ -19,11 +19,12 @@ public class Player : SingletonMonoBehaviour<Player> {
     [Header("REFS")]
     public PlayerCarried carried;
 
-    public bool IsControllable => true;
+    public bool IsControllable => GameSceneManager.current.IsDayRunning;
 
     Rigidbody2D _rb;
 
     protected override void Awake () {
+        base.Awake();
         _rb = GetComponent<Rigidbody2D>();
     }
 
@@ -35,6 +36,14 @@ public class Player : SingletonMonoBehaviour<Player> {
             transform.position += (Vector3) PhysicsTools2D.GetFinalDeltaPosAwaringObstacle(_rb, moveDir, moveSpeed * Time.deltaTime, moveLayerMask);
         }
 
+    }
+
+    void OnTriggerEnter2D (Collider2D other) {
+        DoorTriggerHandler door = other.gameObject.GetComponent<DoorTriggerHandler>();
+
+        if (door != null) {
+
+        }
     }
 
 }

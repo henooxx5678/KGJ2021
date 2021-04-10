@@ -13,6 +13,8 @@ using DoubleHeat.Utilities;
 
 public class Global : SingletonMonoBehaviour<Global> {
 
+    public TransitionManager transitionManager;
+
     protected override void Awake () {
         base.Awake();
 

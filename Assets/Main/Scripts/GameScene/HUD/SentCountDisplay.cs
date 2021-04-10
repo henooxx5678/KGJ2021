@@ -25,7 +25,7 @@ public class SentCountDisplay : DynamicTextDisplay {
             return;
 
             int sentCount = GameSceneManager.current.SentCount;
-        TextUI.text = _initText.Replace("<count>", sentCount.ToString()).Replace("<rate>", (sentCount / 40000f).ToString("0.00"));
+        TextUI.text = _initText.Replace("<count>", sentCount.ToString()).Replace("<rate>", (sentCount / 400f).ToString("0.00"));
     }
 
 }

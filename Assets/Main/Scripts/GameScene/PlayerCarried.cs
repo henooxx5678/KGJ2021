@@ -15,6 +15,8 @@ public class PlayerCarried : MonoBehaviour {
 
     public GameObject[] carriedGOs;
 
+    public Item CurrentCarried {get; private set;} = (Item) 0;
+
 
     void Update () {
         // SWITCH
@@ -27,6 +29,12 @@ public class PlayerCarried : MonoBehaviour {
     }
 
     public void SwitchTo (int index) {
+
+        if (index < 0 || index > carriedGOs.Length)
+            return;
+
+        CurrentCarried = (Item) index;
+
         for (int i = 0 ; i < carriedGOs.Length ; i++) {
             if (i == index) {
                 carriedGOs[i].SetActive(true);

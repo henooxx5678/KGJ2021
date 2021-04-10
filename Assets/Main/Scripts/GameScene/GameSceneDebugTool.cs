@@ -12,16 +12,32 @@ using DoubleHeat.Utilities;
 
 public class GameSceneDebugTool : MonoBehaviour {
 
+    #if UNITY_EDITOR
 
-    #if UNITY_EDTIOR
+    public float hor;
+    public float vert;
+    public float time;
 
     void Update () {
+
+        time = Time.time;
+
         if (Input.GetKeyDown(KeyCode.Q)) {
             GameSceneManager.current.SentCount += 1;
         }
         if (Input.GetKeyDown(KeyCode.P)) {
             GameSceneManager.current.DayCount += 1;
         }
+        if (Input.GetKeyDown(KeyCode.I)) {
+            GameSceneManager.current.OnPineappleSent();
+        }
+        if (Input.GetKeyDown(KeyCode.O)) {
+            GameSceneManager.current.OnMangoSent();
+        }
+
+        hor = Input.GetAxisRaw("Horizontal");
+        vert = Input.GetAxisRaw("Vertical");
+
     }
 
     #endif

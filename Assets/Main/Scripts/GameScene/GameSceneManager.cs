@@ -12,7 +12,16 @@ using DoubleHeat.Utilities;
 
 public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
 
-    int _dayCount = 1;
+    [Header("REFS")]
+    public OverlayEventManager overlayEventManager;
+    public Transform playerStartPoint;
+
+
+    public bool IsDayStarted {get; private set;} = false;
+    public bool IsDayEnded {get; private set;} = false;
+    public bool IsDayRunning => IsDayStarted && !IsDayEnded;
+
+    int _dayCount = 0;
     public int DayCount {
         get => _dayCount;
         set {
@@ -36,16 +45,50 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
     }
 
     void Start () {
-        UpdateAllDynamicTextDisplay();
+        NewDay();
     }
 
+
+    public void PlayerGoNextDay () {
+        IsDayEnded = true;
+
+        Global.current.transitionManager.FadeScreenOut( () => {
+            NewDay();
+            Global.current.transitionManager.FadeScreenIn( () => {
+                IsDayStarted = true;
+            } );
+        } );
+    }
+
+
+    public void OnPineappleSent () {
+        overlayEventManager.PlayEvent(0);
+    }
+
+    public void OnMangoSent () {
+        overlayEventManager.PlayEvent(1);
+    }
 
 
     void UpdateAllDynamicTextDisplay () {
         foreach (var display in DynamicTextDisplay.list) {
             display.UpdateDisplay();
         }
-        print("updated text displays");
+    }
+
+    void UpdateCitizensAtDayStart () {
+        foreach (Citizen citizen in Citizen.list) {
+            citizen.InitDecision();
+            citizen.dialogBox.SetToAllFine();
+        }
+    }
+
+    void NewDay () {
+        DayCount += 1;
+        IsDayStarted = false;
+        IsDayEnded = false;
+        UpdateCitizensAtDayStart();
+        Player.current.transform.SetPosXY(playerStartPoint.position);
     }
 
 }
