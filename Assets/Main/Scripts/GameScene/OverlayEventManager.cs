@@ -25,8 +25,8 @@ public class OverlayEventManager : MonoBehaviour {
 
 
     void Awake () {
-        foreach(GameObject e in events) {
-            e.SetActive(false);
+        foreach(GameObject eGO in events) {
+            eGO.SetActive(false);
         }
     }
 
@@ -34,16 +34,20 @@ public class OverlayEventManager : MonoBehaviour {
 
         for (int i = 0 ; i < events.Length ; i++) {
             if (i == index) {
-                GameObject e = events[i];
+                GameObject eGO = events[i];
 
                 if (_currentSeq != null)
                     _currentSeq.Kill();
 
                 IsEventPlaying = true;
+
+                OverlayEvent e = eGO.GetComponent<OverlayEvent>();
+                float duration = (e != null && e.overrideDuration > 0) ? e.overrideDuration : eventDuration;
+
                 _currentSeq = DOTween.Sequence()
-                    .AppendCallback( () => e.SetActive(true) )
-                    .AppendInterval(eventDuration)
-                    .AppendCallback( () => e.SetActive(false) )
+                    .AppendCallback( () => eGO.SetActive(true) )
+                    .AppendInterval(duration)
+                    .AppendCallback( () => eGO.SetActive(false) )
                     .OnComplete( () => IsEventPlaying = false );
             }
             else {

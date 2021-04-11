@@ -13,6 +13,9 @@ using DoubleHeat.Utilities;
 public class OverlayEvent : MonoBehaviour {
 
 
+    public float overrideDuration = -1f;
+
+
     void OnEnable () {
         AudioSource source = GetComponent<AudioSource>();
 

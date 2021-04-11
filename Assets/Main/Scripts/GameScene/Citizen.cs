@@ -138,7 +138,7 @@ public class Citizen : Visitable {
                 break;
             case Item.Sushi:
                 dialogBox.ShowDialog("", false);
-                // sushi party
+                GameSceneManager.current.overlayEventManager.PlayEvent(2);
                 break;
         }
     }

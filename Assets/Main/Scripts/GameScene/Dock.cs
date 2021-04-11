@@ -29,8 +29,10 @@ public class Dock : Visitable {
             else {
                 if (!HasSentToday) {
                     if (item == Item.Pineapple) {
-                        // go go
+
                         print("go go pineapple");
+                        GameSceneManager.current.overlayEventManager.PlayEvent(4);
+
                         dialogBox.ShowDialog("", false);
                         GameSceneManager.current.SentCount += 100;
                         HasSentToday = true;
@@ -42,7 +44,12 @@ public class Dock : Visitable {
             }
         }
         else {
-            dialogBox.ShowDialog(Dialog.noShip, false);
+            if (GameSceneManager.current.DayCount < GameSceneManager.current.shipRenter.debutDay) {
+                dialogBox.ShowDialog(Dialog.dockClosed, false);
+            }
+            else {
+                dialogBox.ShowDialog(Dialog.noShip, false);
+            }
         }
     }
 

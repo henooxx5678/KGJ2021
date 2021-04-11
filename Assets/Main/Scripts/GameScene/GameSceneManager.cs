@@ -90,6 +90,7 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
         IsDayStarted = false;
         IsDayEnded = false;
         UpdateCitizensAtDayStart();
+        shipRenter.OnNewDay(false);
         Player.current.transform.SetPosXY(playerStartPoint.position);
 
         Global.current.transitionManager.FadeScreenIn( () => {

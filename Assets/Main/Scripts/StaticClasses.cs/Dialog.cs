@@ -20,6 +20,7 @@ public static class Dialog {
     public static string pekoTea = "peko茶壓壓驚";
 
     // Ship Renter
+    public static string dockClosed = "港口封閉中";
     public static string confirmRent = "確定要用1000噸鳳梨跟我租船嗎？不後悔的話就拿著鳳梨再撞我一次";
     public static string howToRent = "想租船就拿1000噸鳳梨來";
     public static string afterRent = "酒後不開船，開船不喝酒";

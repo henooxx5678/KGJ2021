@@ -13,6 +13,9 @@ using DoubleHeat.Utilities;
 
 public class ShipRenter : Visitable {
 
+    public int debutDay = 4;
+
+    [Header("REFS")]
     public DialogBox dialogBox;
 
     int _pineappleGotCount = 0;
@@ -28,8 +31,10 @@ public class ShipRenter : Visitable {
                 _pineappleGotCount++;
 
                 if (_pineappleGotCount >= 2) {
-                    // got ship
+
                     print("got ship");
+                    GameSceneManager.current.overlayEventManager.PlayEvent(3);
+
                     dialogBox.ShowDialog("", false, _defaultDialog);
                     GameSceneManager.current.SentCount += 1000;
 
@@ -48,13 +53,20 @@ public class ShipRenter : Visitable {
     }
 
     public void OnNewDay (bool isBeaching) {
-        if (isBeaching) {
-            _defaultDialog = Dialog.lossSoMuch;
+        if (GameSceneManager.current.DayCount < debutDay) {
+            gameObject.SetActive(false);
         }
         else {
-            _defaultDialog = "";
+            gameObject.SetActive(true);
+
+            if (isBeaching) {
+                _defaultDialog = Dialog.lossSoMuch;
+            }
+            else {
+                _defaultDialog = "";
+            }
+            dialogBox.DialogText = _defaultDialog;
         }
-        dialogBox.DialogText = _defaultDialog;
     }
 
 }
