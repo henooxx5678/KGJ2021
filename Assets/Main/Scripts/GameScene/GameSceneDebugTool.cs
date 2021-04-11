@@ -31,11 +31,10 @@ public class GameSceneDebugTool : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.P)) {
             GameSceneManager.current.DayCount += 1;
         }
-        if (Input.GetKeyDown(KeyCode.I)) {
-            GameSceneManager.current.OnPineappleSent();
-        }
-        if (Input.GetKeyDown(KeyCode.O)) {
-            GameSceneManager.current.OnMangoSent();
+        for (int i = 0 ; i < GameSceneManager.current.overlayEventManager.events.Length ; i++) {
+            if (Input.inputString.Contains((i + 5).ToString())) {
+                GameSceneManager.current.overlayEventManager.PlayEvent(i);
+            }
         }
 
         hor = Input.GetAxisRaw("Horizontal");

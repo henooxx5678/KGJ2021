@@ -18,6 +18,9 @@ public class DialogBox : MonoBehaviour {
     [Header("REFS")]
     public Text textUI;
 
+    public bool HasMaintainEnoughTime {get; set;} = false;
+    public bool IsReturnable {get; set;} = true;
+
     public string DialogText {
         get => textUI.text;
         set {
@@ -26,12 +29,32 @@ public class DialogBox : MonoBehaviour {
     }
 
     Sequence _currentSeq;
+    string _returnedString = "";
+
+    void Update () {
+        if (HasMaintainEnoughTime && IsReturnable) {
+
+            DialogText = _returnedString;
+
+            HasMaintainEnoughTime = false;
+            IsReturnable = false;
+        }
+    }
 
     public void SetToAllFine () {
         DialogText = Dialog.RandomAllFine;
     }
 
     public void ShowDialog (string dialog, bool returnToAllFine = true, string alteredText = "") {
+
+        HasMaintainEnoughTime = false;
+        IsReturnable = false;
+
+        if (returnToAllFine)
+            _returnedString = Dialog.RandomAllFine;
+        else
+            _returnedString = alteredText;
+
         if (_currentSeq != null)
             _currentSeq.Kill(false);
 
@@ -39,10 +62,7 @@ public class DialogBox : MonoBehaviour {
             .AppendCallback( () => DialogText = dialog )
             .AppendInterval(dialogDuration)
             .AppendCallback( () => {
-                if (returnToAllFine)
-                    SetToAllFine();
-                else
-                    DialogText = alteredText;
+                HasMaintainEnoughTime = true;
             } );
     }
 }

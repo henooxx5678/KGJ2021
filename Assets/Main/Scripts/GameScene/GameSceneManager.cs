@@ -56,20 +56,25 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
 
 
     public void PlayerGoNextDay () {
+
+        bool everyoneEaten = true;
+        foreach (Citizen citizen in Citizen.list) {
+            if (!citizen.HasEatenToday) {
+                everyoneEaten = false;
+                break;
+            }
+        }
+
+        if (!everyoneEaten) {
+            overlayEventManager.PlayEvent(5);  // someone not eaten!
+            return;
+        }
+
         IsDayEnded = true;
 
         Global.current.transitionManager.FadeScreenOut( () => {
             NewDayAndStart();
         } );
-    }
-
-
-    public void OnPineappleSent () {
-        overlayEventManager.PlayEvent(0);
-    }
-
-    public void OnMangoSent () {
-        overlayEventManager.PlayEvent(1);
     }
 
 
@@ -90,7 +95,10 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
         IsDayStarted = false;
         IsDayEnded = false;
         UpdateCitizensAtDayStart();
-        shipRenter.OnNewDay(false);
+
+        dock.OnNewDay();
+        shipRenter.OnNewDay(dock.IsBeaching);
+
         Player.current.transform.SetPosXY(playerStartPoint.position);
 
         Global.current.transitionManager.FadeScreenIn( () => {

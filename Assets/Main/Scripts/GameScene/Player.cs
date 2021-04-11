@@ -47,4 +47,13 @@ public class Player : SingletonMonoBehaviour<Player> {
         }
     }
 
+    void OnTriggerExit2D (Collider2D other) {
+        DoorTriggerHandler door = other.gameObject.GetComponent<DoorTriggerHandler>();
+
+        if (door != null) {
+            if (door.visitable != null)
+                door.visitable.OnExit();
+        }
+    }
+
 }

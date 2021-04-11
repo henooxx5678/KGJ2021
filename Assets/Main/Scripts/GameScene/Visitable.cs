@@ -14,4 +14,6 @@ using DoubleHeat.Utilities;
 public class Visitable : MonoBehaviour {
 
     public virtual void Visited (Item item) {}
+
+    public virtual void OnExit () {}
 }

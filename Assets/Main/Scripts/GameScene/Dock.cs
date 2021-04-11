@@ -13,13 +13,23 @@ using DoubleHeat.Utilities;
 
 public class Dock : Visitable {
 
+    public float beachPossibility = 0.5f;
+
+    [Header("REFS")]
     public DialogBox dialogBox;
+    public AudioSource visitSound;
+
 
     public bool IsBeaching {get; set;} = false;
     public bool HasSentToday {get; set;} = false;
 
 
     public override void Visited (Item item) {
+
+        if (HasSentToday)
+            return;
+
+        bool eventTriggerd = false;
 
         if (GameSceneManager.current.HasShip) {
 
@@ -32,6 +42,7 @@ public class Dock : Visitable {
 
                         print("go go pineapple");
                         GameSceneManager.current.overlayEventManager.PlayEvent(4);
+                        eventTriggerd = true;
 
                         dialogBox.ShowDialog("", false);
                         GameSceneManager.current.SentCount += 100;
@@ -51,6 +62,32 @@ public class Dock : Visitable {
                 dialogBox.ShowDialog(Dialog.noShip, false);
             }
         }
+
+        if (!eventTriggerd) {
+            if (visitSound != null) {
+                visitSound.Stop();
+                visitSound.Play();
+            }
+        }
+    }
+
+    public override void OnExit () {
+        dialogBox.IsReturnable = true;
+    }
+
+    public void OnNewDay () {
+
+        if (IsBeaching) {
+            IsBeaching = false;
+        }
+
+        if (HasSentToday) {
+            if (Random.value <= beachPossibility) {
+                IsBeaching = true;
+            }
+        }
+
+        HasSentToday = false;
     }
 
 }

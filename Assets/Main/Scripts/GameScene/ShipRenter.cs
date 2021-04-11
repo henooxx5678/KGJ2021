@@ -24,7 +24,12 @@ public class ShipRenter : Visitable {
     public override void Visited (Item item) {
 
         if (GameSceneManager.current.HasShip) {
-            dialogBox.ShowDialog(Dialog.afterRent, false, _defaultDialog);
+            if (GameSceneManager.current.dock.IsBeaching) {
+                dialogBox.ShowDialog(Dialog.excavatorSent, false, _defaultDialog);
+            }
+            else {
+                dialogBox.ShowDialog(Dialog.afterRent, false, _defaultDialog);
+            }
         }
         else {
             if (item == Item.Pineapple) {
@@ -50,6 +55,10 @@ public class ShipRenter : Visitable {
                 dialogBox.ShowDialog(Dialog.howToRent, false, _defaultDialog);
             }
         }
+    }
+
+    public override void OnExit () {
+        dialogBox.IsReturnable = true;
     }
 
     public void OnNewDay (bool isBeaching) {

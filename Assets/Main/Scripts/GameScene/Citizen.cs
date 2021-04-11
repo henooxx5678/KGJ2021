@@ -25,13 +25,13 @@ public class Citizen : Visitable {
     [Header("REFS")]
     public DialogBox dialogBox;
     public AudioSource visitedSound;
+    public AudioSource acceptSound;
 
     public bool HasEatenToday => (_gotToday != Item.None);
 
     Decision _decision;
     Item     _gotYesterday = Item.None;
     Item     _gotToday = Item.None;
-    int      _continuousNoEatDays = 0;
 
     void Awake () {
         list.Add(this);
@@ -42,36 +42,40 @@ public class Citizen : Visitable {
     }
 
     public void InitDecision () {
-        _decision = new Decision(noSameAsYesterdayPossibility, noSourPossibility, noPekoTeaPossibility, noSushiPossibility);
+        _decision = new Decision(noSameAsYesterdayPossibility, noSourPossibility, noPekoTeaPossibility, noSushiPossibility, _gotYesterday);
     }
 
     public override void Visited (Item item) {
         if (HasEatenToday)
             return;
 
+
+        bool eventTriggered = false;
+        Decide(item, out eventTriggered);
+
         // play sound
-        if (visitedSound != null) {
+        if (!eventTriggered && visitedSound != null) {
             visitedSound.Stop();
             visitedSound.Play();
         }
 
-        Decide(item);
+    }
+
+    public override void OnExit () {
+        dialogBox.IsReturnable = true;
     }
 
     public void OnNewDay () {
         InitDecision();
         dialogBox.SetToAllFine();
 
-        if (!HasEatenToday)
-            _continuousNoEatDays++;
-        else
-            _continuousNoEatDays = 0;
-
         _gotYesterday = _gotToday;
         _gotToday = Item.None;
     }
 
-    void Decide (Item item) {
+    void Decide (Item item, out bool eventTriggered) {
+
+        eventTriggered = false;
 
         if (isMango) {
             if (item == Item.Mango) {
@@ -119,18 +123,23 @@ public class Citizen : Visitable {
         }
 
         _gotToday = item;
-        OnAccept(item);
+        OnAccept(item, out eventTriggered);
     }
 
-    void OnAccept (Item item) {
+    void OnAccept (Item item, out bool eventTriggered) {
+
+        eventTriggered = false;
 
         switch (item) {
             case Item.Pineapple:
-                GameSceneManager.current.OnPineappleSent();
+                GameSceneManager.current.SentCount += 1;
+                GameSceneManager.current.overlayEventManager.PlayEvent(0);
+                eventTriggered = true;
                 dialogBox.ShowDialog("", false);
                 break;
             case Item.Mango:
-                GameSceneManager.current.OnMangoSent();
+                GameSceneManager.current.overlayEventManager.PlayEvent(1);
+                eventTriggered = true;
                 dialogBox.ShowDialog("", false);
                 break;
             case Item.PekoTea:
@@ -138,8 +147,18 @@ public class Citizen : Visitable {
                 break;
             case Item.Sushi:
                 dialogBox.ShowDialog("", false);
+                eventTriggered = true;
                 GameSceneManager.current.overlayEventManager.PlayEvent(2);
                 break;
+        }
+
+        if (!eventTriggered) {
+            if (acceptSound != null) {
+                acceptSound.Stop();
+                acceptSound.Play();
+
+                eventTriggered = true;
+            }
         }
     }
 
@@ -154,11 +173,23 @@ public class Citizen : Visitable {
         public bool noPekoTea;
         public bool noSushi;
 
-        public Decision (float noSameAsYesterdayPossibility, float noSourPossibility, float noPekoTeaPossibility, float noSushiPossibility) {
+        public Decision (float noSameAsYesterdayPossibility, float noSourPossibility, float noPekoTeaPossibility, float noSushiPossibility, Item gotYesterday) {
             noSameAsYesterday = Random.value <= noSameAsYesterdayPossibility;
             noSour            = Random.value <= noSourPossibility;
             noPekoTea         = Random.value <= noPekoTeaPossibility;
             noSushi           = Random.value <= noSushiPossibility;
+
+            if (noSour && noPekoTea && noSushi) {
+                noSour = false;
+            }
+
+            if (gotYesterday == Item.PekoTea && noSameAsYesterday && noSour && noSushi) {
+                noSushi = false;
+            }
+
+            if (gotYesterday == Item.Sushi && noSameAsYesterday && noSour && noPekoTea) {
+                noPekoTea = false;
+            }
         }
     }
 
