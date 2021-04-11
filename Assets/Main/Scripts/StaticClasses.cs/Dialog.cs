@@ -13,7 +13,7 @@ public static class Dialog {
     public static string sameAsYesterday = "可是我昨天才吃過";
     public static string noSour = "今天酸民好多，不想吃酸的";
     public static string noPekoTea = "好油喔peko";
-    public static string noSushi = "這鮭魚他媽有夠生，生到我都能聽到牠吵著要把名字改回去";
+    public static string noSushi = "這鮭魚他媽有夠生，我都能聽到牠吵著要把名字改回去";
     public static string notFood = "這能吃嗎";
     public static string youRude = "你在挑釁我嗎？";
 
