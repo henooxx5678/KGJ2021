@@ -19,7 +19,7 @@ public class Player : SingletonMonoBehaviour<Player> {
     [Header("REFS")]
     public PlayerCarried carried;
 
-    public bool IsControllable => (GameSceneManager.current.IsDayRunning && !GameSceneManager.current.overlayEventManager.IsEventPlaying);
+    public bool IsControllable => (GameSceneManager.current.IsDayRunning && !GameSceneManager.current.overlayEventManager.IsEventPlaying && !GameSceneManager.current.newspaperManager.IsNewspapersShowing);
 
     Rigidbody2D _rb;
 

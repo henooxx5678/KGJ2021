@@ -12,6 +12,9 @@ TextureImporter:
       213: 5017253076143470311
     second: mango
   - first:
+      213: 5693500830476402602
+    second: mango_citizen
+  - first:
       213: -5375531282696022089
     second: peko_tea
   - first:
@@ -21,11 +24,17 @@ TextureImporter:
       213: -1840662099083023399
     second: pineapple2
   - first:
+      213: -2398169729094279095
+    second: salem
+  - first:
       213: 3143400297666154931
     second: ship
   - first:
       213: 1362286125818197051
     second: ship_renter
+  - first:
+      213: -4332735334367988886
+    second: ship_renter2
   - first:
       213: 7143136092789006521
     second: su_head
@@ -123,8 +132,8 @@ TextureImporter:
       name: houseL
       rect:
         serializedVersion: 2
-        x: 1
-        y: 220
+        x: 245
+        y: 215
         width: 417
         height: 393
       alignment: 0
@@ -144,8 +153,8 @@ TextureImporter:
       name: houseR
       rect:
         serializedVersion: 2
-        x: 245
-        y: 630
+        x: 664
+        y: 294
         width: 417
         height: 393
       alignment: 0
@@ -166,7 +175,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 32
+        y: 12
         width: 237
         height: 186
       alignment: 0
@@ -183,11 +192,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: mango_citizen
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 341
+        width: 444
+        height: 346
+      alignment: 9
+      pivot: {x: 0.49324325, y: 0.6040462}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aafffe007d0630f40800000000000000
+      internalID: 5693500830476402602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: peko_tea
       rect:
         serializedVersion: 2
         x: 240
-        y: 105
+        y: 85
         width: 90
         height: 113
       alignment: 9
@@ -207,8 +237,8 @@ TextureImporter:
       name: pineapple1
       rect:
         serializedVersion: 2
-        x: 420
-        y: 272
+        x: 1083
+        y: 331
         width: 146
         height: 356
       alignment: 9
@@ -228,8 +258,8 @@ TextureImporter:
       name: pineapple2
       rect:
         serializedVersion: 2
-        x: 568
-        y: 317
+        x: 246
+        y: 712
         width: 144
         height: 311
       alignment: 9
@@ -241,6 +271,27 @@ TextureImporter:
       bones: []
       spriteID: 9dba1a8b297a476e0800000000000000
       internalID: -1840662099083023399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salem
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 3
+        width: 127
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940ad32665df7bed0800000000000000
+      internalID: -2398169729094279095
       vertices: []
       indices: 
       edges: []
@@ -271,7 +322,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 615
+        y: 200
         width: 242
         height: 408
       alignment: 9
@@ -288,11 +339,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: ship_renter2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 610
+        width: 243
+        height: 413
+      alignment: 9
+      pivot: {x: 0.4979424, y: 0.50363195}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6376315b280fd3c0800000000000000
+      internalID: -4332735334367988886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: su_head
       rect:
         serializedVersion: 2
-        x: 332
-        y: 156
+        x: 370
+        y: 625
         width: 60
         height: 62
       alignment: 9
@@ -312,8 +384,8 @@ TextureImporter:
       name: sushi
       rect:
         serializedVersion: 2
-        x: 240
-        y: 34
+        x: 246
+        y: 618
         width: 122
         height: 69
       alignment: 9
@@ -333,8 +405,8 @@ TextureImporter:
       name: vtuber_0001
       rect:
         serializedVersion: 2
-        x: 364
-        y: 102
+        x: 432
+        y: 635
         width: 44
         height: 52
       alignment: 0
@@ -354,8 +426,8 @@ TextureImporter:
       name: vtuber_0002
       rect:
         serializedVersion: 2
-        x: 394
-        y: 166
+        x: 478
+        y: 635
         width: 44
         height: 52
       alignment: 0
@@ -375,8 +447,8 @@ TextureImporter:
       name: vtuber_0003
       rect:
         serializedVersion: 2
-        x: 364
-        y: 48
+        x: 524
+        y: 635
         width: 44
         height: 52
       alignment: 0
@@ -396,8 +468,8 @@ TextureImporter:
       name: vtuber_0004
       rect:
         serializedVersion: 2
-        x: 420
-        y: 220
+        x: 614
+        y: 973
         width: 44
         height: 50
       alignment: 0
@@ -417,8 +489,8 @@ TextureImporter:
       name: vtuber_0005
       rect:
         serializedVersion: 2
-        x: 410
-        y: 112
+        x: 570
+        y: 635
         width: 42
         height: 52
       alignment: 9

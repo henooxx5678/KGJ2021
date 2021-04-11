@@ -17,18 +17,30 @@ public class ShipRenter : Visitable {
 
     [Header("REFS")]
     public DialogBox dialogBox;
+    public AudioSource visitSound;
+
+
+    public string DefaultDialog {
+        get {
+            if (GameSceneManager.current.dock.IsBeaching)
+                return Dialog.lossSoMuch;
+            else
+                return "";
+        }
+    }
 
     int _pineappleGotCount = 0;
-    string _defaultDialog = "";
 
     public override void Visited (Item item) {
 
+        bool eventTriggered = false;
+
         if (GameSceneManager.current.HasShip) {
             if (GameSceneManager.current.dock.IsBeaching) {
-                dialogBox.ShowDialog(Dialog.excavatorSent, false, _defaultDialog);
+                dialogBox.ShowDialog(Dialog.excavatorSent, false, DefaultDialog);
             }
             else {
-                dialogBox.ShowDialog(Dialog.afterRent, false, _defaultDialog);
+                dialogBox.ShowDialog(Dialog.afterRent, false, DefaultDialog);
             }
         }
         else {
@@ -39,21 +51,28 @@ public class ShipRenter : Visitable {
 
                     print("got ship");
                     GameSceneManager.current.overlayEventManager.PlayEvent(3);
+                    eventTriggered = true;
 
-                    dialogBox.ShowDialog("", false, _defaultDialog);
+                    dialogBox.ShowDialog("", false, DefaultDialog);
                     GameSceneManager.current.SentCount += 1000;
 
                     GameSceneManager.current.HasShip = true;
+                    GameSceneManager.current.dock.UpdateShipShowing();
                 }
                 else if (_pineappleGotCount == 1) {
-                    dialogBox.ShowDialog(Dialog.confirmRent, false, _defaultDialog);
+                    dialogBox.ShowDialog(Dialog.confirmRent, false, DefaultDialog);
                 }
             }
             else {
                 _pineappleGotCount = 0;
 
-                dialogBox.ShowDialog(Dialog.howToRent, false, _defaultDialog);
+                dialogBox.ShowDialog(Dialog.howToRent, false, DefaultDialog);
             }
+        }
+
+        if (!eventTriggered && visitSound != null) {
+            visitSound.Stop();
+            visitSound.Play();
         }
     }
 
@@ -68,13 +87,7 @@ public class ShipRenter : Visitable {
         else {
             gameObject.SetActive(true);
 
-            if (isBeaching) {
-                _defaultDialog = Dialog.lossSoMuch;
-            }
-            else {
-                _defaultDialog = "";
-            }
-            dialogBox.DialogText = _defaultDialog;
+            dialogBox.DialogText = DefaultDialog;
         }
     }
 

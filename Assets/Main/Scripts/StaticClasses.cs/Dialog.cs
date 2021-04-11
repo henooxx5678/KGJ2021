@@ -29,6 +29,6 @@ public static class Dialog {
 
     // Dock
     public static string noShip = "沒船還想銷售海外？去找船東租艘船吧";
-    public static string shipOnlyForPineapple = "此船只運鳳梨，一趟100噸";
+    public static string shipOnlyForPineapple = "馬的只運鳳梨啦幹";
     public static string shipBeached = "你的鳳梨船在蘇伊士運河擱淺了，成為了世界的塞子！";
 }

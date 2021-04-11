@@ -15,12 +15,14 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
     [Header("REFS")]
     public OverlayEventManager overlayEventManager;
     public Transform playerStartPoint;
+    public NewspaperManager newspaperManager;
 
     [Header("Visitable")]
     public ShipRenter shipRenter;
     public Dock       dock;
 
 
+    public bool HasWon {get; private set;} = false;
     public bool HasShip {get; set;} = false;
 
     public bool IsDayStarted {get; private set;} = false;
@@ -55,7 +57,7 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
     }
 
 
-    public void PlayerGoNextDay () {
+    public void PlayerGoNextDay (bool force = false) {
 
         bool everyoneEaten = true;
         foreach (Citizen citizen in Citizen.list) {
@@ -65,7 +67,7 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
             }
         }
 
-        if (!everyoneEaten) {
+        if (!force && !everyoneEaten) {
             overlayEventManager.PlayEvent(5);  // someone not eaten!
             return;
         }
@@ -91,6 +93,12 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
     }
 
     void NewDayAndStart () {
+
+        if (SentCount >= 40000) {
+            Win();
+            return;
+        }
+
         DayCount += 1;
         IsDayStarted = false;
         IsDayEnded = false;
@@ -101,8 +109,24 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
 
         Player.current.transform.SetPosXY(playerStartPoint.position);
 
+
+        if (DayCount == 1) {
+            newspaperManager.Play(0);
+        }
+        else if (DayCount == shipRenter.debutDay) {
+            newspaperManager.Play(1);
+        }
+
         Global.current.transitionManager.FadeScreenIn( () => {
             IsDayStarted = true;
+        } );
+    }
+
+    void Win () {
+        HasWon = true;
+        newspaperManager.Play(3);
+        Global.current.transitionManager.FadeScreenIn( () => {
+            
         } );
     }
 

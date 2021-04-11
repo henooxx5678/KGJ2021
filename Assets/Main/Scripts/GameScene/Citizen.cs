@@ -41,8 +41,8 @@ public class Citizen : Visitable {
         list.Remove(this);
     }
 
-    public void InitDecision () {
-        _decision = new Decision(noSameAsYesterdayPossibility, noSourPossibility, noPekoTeaPossibility, noSushiPossibility, _gotYesterday);
+    public void InitDecision (Item gotYesterday) {
+        _decision = new Decision(noSameAsYesterdayPossibility, noSourPossibility, noPekoTeaPossibility, noSushiPossibility, gotYesterday);
     }
 
     public override void Visited (Item item) {
@@ -66,11 +66,12 @@ public class Citizen : Visitable {
     }
 
     public void OnNewDay () {
-        InitDecision();
         dialogBox.SetToAllFine();
 
         _gotYesterday = _gotToday;
         _gotToday = Item.None;
+
+        InitDecision(_gotYesterday);
     }
 
     void Decide (Item item, out bool eventTriggered) {
@@ -157,8 +158,8 @@ public class Citizen : Visitable {
                 acceptSound.Stop();
                 acceptSound.Play();
 
-                eventTriggered = true;
             }
+            eventTriggered = true;
         }
     }
 

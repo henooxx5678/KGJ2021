@@ -24,7 +24,8 @@ public class DialogBox : MonoBehaviour {
     public string DialogText {
         get => textUI.text;
         set {
-            textUI.text = value;
+            if (textUI != null)
+                textUI.text = value;
         }
     }
 

@@ -1,3 +1,4 @@
+using Math = System.Math;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,15 +22,24 @@ public class GameSceneDebugTool : MonoBehaviour {
     public bool  isOverlayEventPlaying;
     public bool  isPlayerControllable;
 
+    #endif
+
     void Update () {
+
+        if (Input.GetKeyDown(KeyCode.Q) && Player.current.IsControllable) {
+            int sentCount = GameSceneManager.current.SentCount;
+
+            int step = (int) Mathf.Pow(10, (int) Mathf.Max(Mathf.Log10(sentCount), 0f));
+            print("ADD " + step);
+            GameSceneManager.current.SentCount += step;
+        }
+
+        #if UNITY_EDITOR
 
         time = Time.time;
 
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            GameSceneManager.current.SentCount += 1;
-        }
         if (Input.GetKeyDown(KeyCode.P)) {
-            GameSceneManager.current.DayCount += 1;
+            GameSceneManager.current.PlayerGoNextDay(true);
         }
         for (int i = 0 ; i < GameSceneManager.current.overlayEventManager.events.Length ; i++) {
             if (Input.inputString.Contains((i + 5).ToString())) {
@@ -44,8 +54,8 @@ public class GameSceneDebugTool : MonoBehaviour {
         isOverlayEventPlaying = GameSceneManager.current.overlayEventManager.IsEventPlaying;
         isPlayerControllable = Player.current.IsControllable;
 
+        #endif
     }
 
-    #endif
 
 }

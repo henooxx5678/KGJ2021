@@ -18,10 +18,23 @@ public class Dock : Visitable {
     [Header("REFS")]
     public DialogBox dialogBox;
     public AudioSource visitSound;
+    public GameObject shipAtDock;
 
 
     public bool IsBeaching {get; set;} = false;
     public bool HasSentToday {get; set;} = false;
+
+
+    public string DefaultDialog {
+        get {
+            if (GameSceneManager.current.HasShip && !IsBeaching && !HasSentToday) {
+                return "此船只運鳳梨，一趟100噸";
+            }
+            else {
+                return "";
+            }
+        }
+    }
 
 
     public override void Visited (Item item) {
@@ -34,7 +47,7 @@ public class Dock : Visitable {
         if (GameSceneManager.current.HasShip) {
 
             if (IsBeaching) {
-                dialogBox.ShowDialog(Dialog.shipBeached, false);
+                dialogBox.ShowDialog(Dialog.shipBeached, false, DefaultDialog);
             }
             else {
                 if (!HasSentToday) {
@@ -44,22 +57,23 @@ public class Dock : Visitable {
                         GameSceneManager.current.overlayEventManager.PlayEvent(4);
                         eventTriggerd = true;
 
-                        dialogBox.ShowDialog("", false);
+                        dialogBox.ShowDialog("", false, "");
                         GameSceneManager.current.SentCount += 100;
                         HasSentToday = true;
+                        UpdateShipShowing();
                     }
                     else {
-                        dialogBox.ShowDialog(Dialog.shipOnlyForPineapple, false);
+                        dialogBox.ShowDialog(Dialog.shipOnlyForPineapple, false, DefaultDialog);
                     }
                 }
             }
         }
         else {
             if (GameSceneManager.current.DayCount < GameSceneManager.current.shipRenter.debutDay) {
-                dialogBox.ShowDialog(Dialog.dockClosed, false);
+                dialogBox.ShowDialog(Dialog.dockClosed, false, DefaultDialog);
             }
             else {
-                dialogBox.ShowDialog(Dialog.noShip, false);
+                dialogBox.ShowDialog(Dialog.noShip, false, DefaultDialog);
             }
         }
 
@@ -87,7 +101,22 @@ public class Dock : Visitable {
             }
         }
 
+        if (IsBeaching) {
+            GameSceneManager.current.newspaperManager.Play(2);
+        }
+
         HasSentToday = false;
+        UpdateShipShowing();
+    }
+
+    public void UpdateShipShowing () {
+        if (GameSceneManager.current.HasShip && !IsBeaching && !HasSentToday) {
+            shipAtDock.SetActive(true);
+        }
+        else {
+            shipAtDock.SetActive(false);
+        }
+        dialogBox.DialogText = DefaultDialog;
     }
 
 }
