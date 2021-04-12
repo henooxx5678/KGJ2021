@@ -658,6 +658,16 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3652652686589435381, guid: f633322a9a9f83045acfe4134c5fe42e,
+        type: 3}
+      propertyPath: m_Name
+      value: Marine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
+        type: 3}
+      propertyPath: noSushiPossibility
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 3652652686958404285, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -1559,10 +1569,10 @@ RectTransform:
   m_Father: {fileID: 1686139382}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.5, y: 0}
+  m_SizeDelta: {x: 1067, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &660005638
 MonoBehaviour:
@@ -1585,7 +1595,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 8f0e65fc5c8ebd24f851f77af9a687b6, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2040,10 +2050,10 @@ RectTransform:
   m_Father: {fileID: 1686139382}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.5, y: 0}
+  m_SizeDelta: {x: 1067, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &819764396
 MonoBehaviour:
@@ -2066,7 +2076,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 466c80560b02792499a5fbea71525d5d, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3516,10 +3526,10 @@ RectTransform:
   m_Father: {fileID: 1686139382}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.5, y: 0}
+  m_SizeDelta: {x: 1067, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1223852430
 MonoBehaviour:
@@ -3542,7 +3552,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 96209c077908b034c91a2430142c968a, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3686,6 +3696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: acceptSound
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
+        type: 3}
+      propertyPath: noSushiPossibility
+      value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 3652652686958404285, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
@@ -4103,10 +4118,10 @@ RectTransform:
   m_Father: {fileID: 1686139382}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.5, y: 0}
+  m_SizeDelta: {x: 1067, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1626260825
 MonoBehaviour:
@@ -4129,7 +4144,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: c6ac110c53e21be4e8b5c11c447c63b6, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5177,7 +5192,7 @@ PrefabInstance:
     - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
       propertyPath: noSushiPossibility
-      value: 0.23
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
