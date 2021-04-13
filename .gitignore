@@ -47,8 +47,9 @@ Corridor/Library/metadata/
 # ========= #
 # My Builds #
 # ========= #
-/Builds
 
-# ===== #
-# Wwise #
-# ===== #
+
+Library/ArtifactDB
+Library/EditorUserBuildSettings.asset
+Library/shadercompiler-UnityShaderCompiler.exe0.log
+Library/SourceAssetDB
