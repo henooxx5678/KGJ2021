@@ -16,7 +16,9 @@ public class NewspaperManager : MonoBehaviour {
     public float waitDuration = 1f;
 
     public GameObject[] newspapers;
-    public GameObject   goableMsg;
+    public GameObject[] globalMsgs;
+
+    public GameObject GlobalMsg => globalMsgs[Global.current.currentTextType];
 
     public bool IsNewspapersShowing {get; private set;} = false;
 
@@ -25,7 +27,7 @@ public class NewspaperManager : MonoBehaviour {
     Sequence _seq;
 
     void Update () {
-        if (_isGoable && Input.anyKeyDown) {
+        if (_isGoable && Input.inputString.Length > 0) {
 
             if (GameSceneManager.current.HasWon) {
                 SceneManager.LoadScene("StartScene");
@@ -33,7 +35,7 @@ public class NewspaperManager : MonoBehaviour {
             else {
 
                 _isGoable = false;
-                goableMsg.SetActive(false);
+                GlobalMsg.SetActive(false);
 
                 foreach (GameObject newspaper in newspapers) {
                     newspaper.SetActive(false);
@@ -48,7 +50,7 @@ public class NewspaperManager : MonoBehaviour {
     public void Play (int index) {
 
         _isGoable = false;
-        goableMsg.SetActive(false);
+        GlobalMsg.SetActive(false);
 
         for (int i = 0 ; i < newspapers.Length ; i++) {
             if (i == index) {
@@ -62,13 +64,17 @@ public class NewspaperManager : MonoBehaviour {
                     .AppendInterval(waitDuration)
                     .AppendCallback( () => {
                         _isGoable = true;
-                        goableMsg.SetActive(true);
+                        GlobalMsg.SetActive(true);
                     } );
             }
             else {
                 newspapers[i].SetActive(false);
             }
         }
+    }
+
+    public void OpenUrl (string url) {
+        Application.OpenURL(url);
     }
 
 }

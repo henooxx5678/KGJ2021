@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+using TMPro;
 using DG.Tweening;
 
 using DoubleHeat;
@@ -17,15 +18,36 @@ public class DialogBox : MonoBehaviour {
 
     [Header("REFS")]
     public Text textUI;
+    public TextMeshProUGUI textMeshProUI;
 
     public bool HasMaintainEnoughTime {get; set;} = false;
     public bool IsReturnable {get; set;} = true;
 
     public string DialogText {
-        get => textUI.text;
+        get {
+            switch (Global.current.currentTextType) {
+                case 0:
+                    if (textUI != null)
+                        return textUI.text;
+                    break;
+                case 1:
+                    if (textMeshProUI != null)
+                        return textMeshProUI.text;
+                    break;
+            }
+            return "";
+        }
         set {
-            if (textUI != null)
-                textUI.text = value;
+            switch (Global.current.currentTextType) {
+                case 0:
+                    if (textUI != null)
+                        textUI.text = value;
+                    break;
+                case 1:
+                    if (textMeshProUI != null)
+                        textMeshProUI.text = value;
+                    break;
+            }
         }
     }
 

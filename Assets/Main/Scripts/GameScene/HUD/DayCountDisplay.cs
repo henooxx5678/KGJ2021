@@ -11,7 +11,7 @@ using DG.Tweening;
 using DoubleHeat;
 using DoubleHeat.Utilities;
 
-[RequireComponent(typeof(Text))]
+
 public class DayCountDisplay : DynamicTextDisplay {
 
     protected override void Awake () {
@@ -23,7 +23,7 @@ public class DayCountDisplay : DynamicTextDisplay {
         if (!_isInited)
             return;
 
-        TextUI.text = _initText.Replace("<count>", GameSceneManager.current.DayCount.ToString());
+        TextString = _initText.Replace("<count>", GameSceneManager.current.DayCount.ToString());
     }
 
 }

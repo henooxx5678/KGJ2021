@@ -6,12 +6,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+using TMPro;
 using DG.Tweening;
 
 using DoubleHeat;
 using DoubleHeat.Utilities;
 
-[RequireComponent(typeof(Text))]
+
 public class DynamicTextDisplay : MonoBehaviour {
 
     public static List<DynamicTextDisplay> list = new List<DynamicTextDisplay>();
@@ -27,14 +28,48 @@ public class DynamicTextDisplay : MonoBehaviour {
         }
     }
 
+    TextMeshProUGUI _tmpUI;
+    public TextMeshProUGUI TmpUI {
+        get {
+            if (_tmpUI == null)
+                _tmpUI = GetComponent<TextMeshProUGUI>();
+
+            return _tmpUI;
+        }
+    }
+
+    public string TextString {
+        get {
+            switch (Global.current.currentTextType) {
+                case 0:
+                    return TextUI != null ? TextUI.text : "";
+                case 1:
+                    return TmpUI != null ? TmpUI.text : "";
+            }
+            return "";
+        }
+        set {
+            switch (Global.current.currentTextType) {
+                case 0:
+                    if (TextUI != null)
+                        TextUI.text = value;
+                    break;
+                case 1:
+                    if (TmpUI != null)
+                        TmpUI.text = value;
+                    break;
+            }
+        }
+    }
+
     protected bool _isInited = false;
 
     protected string _initText = "";
 
 
     protected virtual void Awake () {
-        _text = GetComponent<Text>();
-        _initText = _text.text;
+
+        _initText = TextString;
 
         _isInited = true;
 

@@ -25,7 +25,7 @@ public class MenuSceneManager : MonoBehaviour {
             print("Quit");
             Application.Quit();
         }
-        else if (Input.anyKeyDown) {
+        else if (Input.inputString.Length > 0) {
             Global.current.transitionManager.FadeScreenOut( () => {
                 SceneManager.LoadScene("GameScene");
             } );

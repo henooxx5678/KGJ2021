@@ -11,7 +11,7 @@ using DG.Tweening;
 using DoubleHeat;
 using DoubleHeat.Utilities;
 
-[RequireComponent(typeof(Text))]
+
 public class SentCountDisplay : DynamicTextDisplay {
 
 
@@ -24,8 +24,8 @@ public class SentCountDisplay : DynamicTextDisplay {
         if (!_isInited)
             return;
 
-            int sentCount = GameSceneManager.current.SentCount;
-        TextUI.text = _initText.Replace("<count>", sentCount.ToString()).Replace("<rate>", (sentCount / 400f).ToString("0.00"));
+        int sentCount = GameSceneManager.current.SentCount;
+        TextString = _initText.Replace("<count>", sentCount.ToString()).Replace("<rate>", (sentCount / 400f).ToString("0.00"));
     }
 
 }
