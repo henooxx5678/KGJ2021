@@ -42,7 +42,7 @@ public class Citizen : Visitable {
     }
 
     public void InitDecision (Item gotYesterday) {
-        _decision = new Decision(noSameAsYesterdayPossibility, noSourPossibility, noPekoTeaPossibility, noSushiPossibility, gotYesterday);
+        _decision = new Decision(noSameAsYesterdayPossibility, noSourPossibility, noPekoTeaPossibility, noSushiPossibility, gotYesterday, isMango);
     }
 
     public override void Visited (Item item) {
@@ -174,7 +174,7 @@ public class Citizen : Visitable {
         public bool noPekoTea;
         public bool noSushi;
 
-        public Decision (float noSameAsYesterdayPossibility, float noSourPossibility, float noPekoTeaPossibility, float noSushiPossibility, Item gotYesterday) {
+        public Decision (float noSameAsYesterdayPossibility, float noSourPossibility, float noPekoTeaPossibility, float noSushiPossibility, Item gotYesterday, bool isMango) {
             noSameAsYesterday = Random.value <= noSameAsYesterdayPossibility;
             noSour            = Random.value <= noSourPossibility;
             noPekoTea         = Random.value <= noPekoTeaPossibility;
@@ -190,6 +190,13 @@ public class Citizen : Visitable {
 
             if (gotYesterday == Item.Sushi && noSameAsYesterday && noSour && noPekoTea) {
                 noPekoTea = false;
+            }
+
+            if (isMango) {
+                if (gotYesterday == Item.Pineapple && noSameAsYesterday && noPekoTea && noSushi) {
+                    noSour = false;
+                    noSameAsYesterday = false;
+                }
             }
         }
     }
