@@ -58,7 +58,7 @@ public class Dock : Visitable {
                         eventTriggerd = true;
 
                         dialogBox.ShowDialog("", false, "");
-                        GameSceneManager.current.SentCount += 100;
+                        GameSceneManager.current.SendPineapple(100);
                         HasSentToday = true;
                         UpdateShipShowing();
                     }

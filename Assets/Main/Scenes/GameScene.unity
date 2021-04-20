@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3cc0de69ad33424b80526e2fb68a455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beachPossibility: 0.658
+  beachPossibility: 1
   dialogBox: {fileID: 978882791}
   visitSound: {fileID: 141642267}
   shipAtDock: {fileID: 981596719}
@@ -1147,7 +1147,7 @@ PrefabInstance:
     - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
       propertyPath: noSushiPossibility
-      value: 0.75
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 3652652686958404285, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
@@ -3772,7 +3772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a85429d221b2649a7dc88eac9a9419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debutDay: 4
+  debutDay: 2
   dialogBox: {fileID: 1480906851}
   visitSound: {fileID: 1110867265}
 --- !u!61 &1110867264
@@ -4520,7 +4520,7 @@ PrefabInstance:
     - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
       propertyPath: noSushiPossibility
-      value: 0.72
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 3652652686958404285, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
@@ -5548,7 +5548,7 @@ PrefabInstance:
     - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
       propertyPath: noSushiPossibility
-      value: 0.73
+      value: 0.87
       objectReference: {fileID: 0}
     - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
@@ -6311,7 +6311,7 @@ PrefabInstance:
     - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}
       propertyPath: noSushiPossibility
-      value: 0.5
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3652652686589435383, guid: f633322a9a9f83045acfe4134c5fe42e,
         type: 3}

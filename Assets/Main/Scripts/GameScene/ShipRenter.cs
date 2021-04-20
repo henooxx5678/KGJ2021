@@ -54,7 +54,7 @@ public class ShipRenter : Visitable {
                     eventTriggered = true;
 
                     dialogBox.ShowDialog("", false, DefaultDialog);
-                    GameSceneManager.current.SentCount += 1000;
+                    GameSceneManager.current.SendPineapple(1000);
 
                     GameSceneManager.current.HasShip = true;
                     GameSceneManager.current.dock.UpdateShipShowing();

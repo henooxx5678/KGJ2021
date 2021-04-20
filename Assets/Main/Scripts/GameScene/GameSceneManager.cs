@@ -57,6 +57,16 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
     }
 
 
+    public void SendPineapple (int amount) {
+        int result = SentCount + amount;
+
+        if (result < SentCount)
+            SentCount = System.Int32.MaxValue;
+        else
+            SentCount = result;
+    }
+
+
     public void PlayerGoNextDay (bool force = false) {
 
         bool everyoneEaten = true;
@@ -126,7 +136,7 @@ public class GameSceneManager : SingletonMonoBehaviour<GameSceneManager> {
         HasWon = true;
         newspaperManager.Play(3);
         Global.current.transitionManager.FadeScreenIn( () => {
-            
+
         } );
     }
 

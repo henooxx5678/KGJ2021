@@ -31,7 +31,7 @@ public class GameSceneDebugTool : MonoBehaviour {
 
             int step = (int) Mathf.Pow(10, (int) Mathf.Max(Mathf.Log10(sentCount), 0f));
             print("ADD " + step);
-            GameSceneManager.current.SentCount += step;
+            GameSceneManager.current.SendPineapple(step);
         }
 
         #if UNITY_EDITOR

@@ -48,7 +48,7 @@ Corridor/Library/metadata/
 # My Builds #
 # ========= #
 
-
+/Library/
 Library/ArtifactDB
 Library/EditorUserBuildSettings.asset
 Library/shadercompiler-UnityShaderCompiler.exe0.log

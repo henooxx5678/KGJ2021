@@ -133,7 +133,7 @@ public class Citizen : Visitable {
 
         switch (item) {
             case Item.Pineapple:
-                GameSceneManager.current.SentCount += 1;
+                GameSceneManager.current.SendPineapple(1);
                 GameSceneManager.current.overlayEventManager.PlayEvent(0);
                 eventTriggered = true;
                 dialogBox.ShowDialog("", false);
